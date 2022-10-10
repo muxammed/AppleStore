@@ -54,7 +54,8 @@ final class QueryView: UIView {
     private func configureFrames() {
         searchIcon.frame = CGRect(x: 10, y: 0, width: 18, height: 18)
         searchIcon.center.y = self.frame.height / 2
-        queryTextLabel.frame = CGRect(x: searchIcon.frame.maxX + 8, y: 0, width: self.frame.width - 16, height: queryTextLabel.font.pointSize)
+        queryTextLabel.frame = CGRect(x: searchIcon.frame.maxX + 8, y: 0,
+                                      width: self.frame.width - 16, height: queryTextLabel.font.pointSize)
         queryTextLabel.center.y = self.frame.height / 2
         seperatorView.frame = CGRect(x: 0, y: searchIcon.frame.maxY + 10, width: self.frame.width, height: 1)
     }
