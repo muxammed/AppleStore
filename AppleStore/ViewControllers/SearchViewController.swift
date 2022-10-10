@@ -104,7 +104,7 @@ final class SearchViewController: UIViewController {
     }
     
     // MARK: - Public methods
-    @objc func productTapped(_ sender: UITapGestureRecognizer) {
+    @objc func productTappedAction(_ sender: UITapGestureRecognizer) {
         guard let view = sender.view else { return }
         let selectedProduct = products[view.tag]
         let detailsViewController = ProductDetailsViewController()
@@ -128,7 +128,7 @@ final class SearchViewController: UIViewController {
         
     }
     
-    fileprivate func addingProductViews() {
+    private func addingProductViews() {
         
         productItemWidth = (view.frame.width - 20 - 16) / 2.8
         productsScrollView.frame = CGRect(x: 0, y: lastViewedLabel.frame.maxY + 30,
@@ -148,13 +148,13 @@ final class SearchViewController: UIViewController {
             productView.productName.text = products[productIndex].name
             productView.productImage.image = UIImage(named: products[productIndex].imageName)
             productView.tag = productIndex
-            let tap = UITapGestureRecognizer(target: self, action: #selector(productTapped(_:)))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(productTappedAction(_:)))
             
             productView.addGestureRecognizer(tap)
         }
     }
     
-    fileprivate func addingQueryViews() {
+    private func addingQueryViews() {
         for queryIndex in 0..<queries.count {
             let yAxis = CGFloat(50 * queryIndex)
             let queryView = QueryView(frame: CGRect(x: 20, y: queryOptionsLabel.frame.maxY + yAxis,
@@ -164,7 +164,7 @@ final class SearchViewController: UIViewController {
         }
     }
     
-    fileprivate func configureViews() {
+    private func configureViews() {
         view.backgroundColor = .black
         searchTitleLabel.frame = CGRect(x: 20, y: view.safeAreaInsets.top + 4,
                                         width: view.frame.width - 40, height: searchTitleLabel.font.pointSize)

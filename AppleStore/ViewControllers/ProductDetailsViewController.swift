@@ -7,6 +7,12 @@
 
 import UIKit
 
+/// энам для названия картинок
+enum Images: String {
+    case share = "square.and.arrow.up"
+    case favorite = "heart"
+}
+
 /// ProductDetailsViewController экран с детализацией выбранного продукта
 final class ProductDetailsViewController: UIViewController {
     
@@ -165,48 +171,20 @@ final class ProductDetailsViewController: UIViewController {
         productNameSmallerLabel.frame = CGRect(x: 10, y: imagesScrollView.frame.maxY + 22, width: view.frame.width - 20,
                                                height: productNameSmallerLabel.font.pointSize)
         
-        guard let product = self.product else { return }
-        
-        for imageIndex in 0..<product.images.count {
-            
-            let pageView = UIView(frame: CGRect(x: CGFloat(imageIndex) * view.frame.width, y: 0,
-                                                width: imagesScrollView.frame.width, height: 250))
-            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 250, height: 220))
-            imageView.center.x = pageView.frame.width / 2
-            imageView.center.y = pageView.frame.height / 2
-            imageView.contentMode = .scaleAspectFit
-            imageView.image = UIImage(named: product.images[imageIndex])
-            pageView.addSubview(imageView)
-            imagesScrollView.addSubview(pageView)
-        }
+        loadScrollViewContent()
         
         buttonsView.frame = CGRect(x: 0, y: productNameSmallerLabel.frame.maxY + 50, width: 100, height: 50)
         circleOne.frame = CGRect(x: 10, y: 0, width: 33, height: 33)
         circleTwo.frame = CGRect(x: 60, y: 0, width: 33, height: 33)
         
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = circleOne.frame.size
-        gradientLayer.colors = [UIColor(red: 46 / 255, green: 46 / 255, blue: 46 / 255, alpha: 1),
-                                UIColor(red: 74 / 255, green: 74 / 255, blue: 74 / 255, alpha: 1)]
-        let gradientLayer2 = CAGradientLayer()
-        gradientLayer2.frame.size = circleTwo.frame.size
-        gradientLayer2.colors = [UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1),
-                                UIColor(red: 164 / 255, green: 164 / 255, blue: 164 / 255, alpha: 1)]
+        addingGradientToCircleViews()
         
-        circleOne.backgroundColor = UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1)
-        circleTwo.backgroundColor = UIColor(red: 46 / 255, green: 46 / 255, blue: 46 / 255, alpha: 1)
-        circleOne.layer.addSublayer(gradientLayer)
-        circleTwo.layer.addSublayer(gradientLayer2)
         circleBorder.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         circleBorder.center = circleTwo.center
         buttonsView.center.x = view.center.x
         
         checkImageView.frame = CGRect(x: 80, y: buttonsView.frame.maxY + 20, width: 20, height: 20)
-        
-        var attrString = AttributedString(Constants.compatibleTextOne)
-        guard let range = attrString.range(of: Constants.compatibleTextTwo) else { return }
-        attrString[range].foregroundColor = UIColor.systemBlue
-        compatibleTextLabel.attributedText = NSAttributedString(attrString)
+        manageAttributedString()
         compatibleTextLabel.frame = CGRect(x: checkImageView.frame.maxX + 10, y: 0,
                                            width: 240, height: compatibleTextLabel.font.pointSize)
         compatibleTextLabel.center.y = checkImageView.center.y
@@ -223,9 +201,52 @@ final class ProductDetailsViewController: UIViewController {
                                       width: view.frame.width - 50, height: bottomOneLabel.font.pointSize)
     }
     
+    func manageAttributedString() {
+        var attrString = AttributedString(Constants.compatibleTextOne)
+        guard let range = attrString.range(of: Constants.compatibleTextTwo) else { return }
+        attrString[range].foregroundColor = UIColor.systemBlue
+        compatibleTextLabel.attributedText = NSAttributedString(attrString)
+    }
+    
+    func addingGradientToCircleViews() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame.size = circleOne.frame.size
+        gradientLayer.colors = [UIColor(red: 46 / 255, green: 46 / 255, blue: 46 / 255, alpha: 1),
+                                UIColor(red: 74 / 255, green: 74 / 255, blue: 74 / 255, alpha: 1)]
+        let gradientLayer2 = CAGradientLayer()
+        gradientLayer2.frame.size = circleTwo.frame.size
+        gradientLayer2.colors = [UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1),
+                                UIColor(red: 164 / 255, green: 164 / 255, blue: 164 / 255, alpha: 1)]
+        
+        circleOne.backgroundColor = UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1)
+        circleTwo.backgroundColor = UIColor(red: 46 / 255, green: 46 / 255, blue: 46 / 255, alpha: 1)
+        circleOne.layer.addSublayer(gradientLayer)
+        circleTwo.layer.addSublayer(gradientLayer2)
+    }
+    
+    func loadScrollViewContent() {
+        guard let product = self.product else { return }
+        
+        for imageIndex in 0..<product.images.count {
+            
+            let pageView = UIView(frame: CGRect(x: CGFloat(imageIndex) * view.frame.width, y: 0,
+                                                width: imagesScrollView.frame.width, height: 250))
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 250, height: 220))
+            imageView.center.x = pageView.frame.width / 2
+            imageView.center.y = pageView.frame.height / 2
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = UIImage(named: product.images[imageIndex])
+            pageView.addSubview(imageView)
+            imagesScrollView.addSubview(pageView)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupViews()
+    }
+    
+    func setupViews() {
         view?.backgroundColor = .black
         imagesScrollView.delegate = self
         imagesScrollView.isPagingEnabled = true
@@ -252,15 +273,18 @@ final class ProductDetailsViewController: UIViewController {
         productNameLabel.text = product.name
         productImageView.image = UIImage(named: product.imageName)
         productNameSmallerLabel.text = product.name
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        configOnViewWillAppear()
+    }
+    
+    func configOnViewWillAppear() {
         navigationController?.navigationBar.backgroundColor = .gray
-        let shareButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.up"),
+        let shareButton = UIBarButtonItem(image: UIImage(systemName: Images.share.rawValue),
                                           style: .plain, target: nil, action: nil)
-        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: "heart"),
+        let favoriteButton = UIBarButtonItem(image: UIImage(systemName: Images.favorite.rawValue),
                                              style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItems = [favoriteButton, shareButton]
         
@@ -298,7 +322,7 @@ extension ProductDetailsViewController: UIScrollViewDelegate {
     }
 }
 
-/// UIImage
+/// UIImage делает отступы паддинги внутри ImageView от самой картины
 extension UIImage {
 
     func withInset(_ insets: UIEdgeInsets) -> UIImage? {
@@ -309,7 +333,7 @@ extension UIImage {
         defer { UIGraphicsEndImageContext() }
 
         let origin = CGPoint(x: insets.left * self.scale, y: insets.top * self.scale)
-        self.draw(at: origin)
+        draw(at: origin)
 
         return UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(self.renderingMode)
     }
