@@ -151,6 +151,7 @@ final class ProductDetailsViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
         label.textColor = .systemBlue
         label.text = Constants.bottomTextThree
+        label.isUserInteractionEnabled = true
         return label
     }()
     
@@ -201,6 +202,13 @@ final class ProductDetailsViewController: UIViewController {
                                       width: view.frame.width - 50, height: bottomOneLabel.font.pointSize)
     }
     
+    @objc func goToWebView() {
+        let webViewController = WebViewController()
+        guard let product = product else { return }
+        webViewController.url = product.productUrl
+        present(webViewController, animated: true, completion: nil)
+    }
+    
     func manageAttributedString() {
         var attrString = AttributedString(Constants.compatibleTextOne)
         guard let range = attrString.range(of: Constants.compatibleTextTwo) else { return }
@@ -218,10 +226,12 @@ final class ProductDetailsViewController: UIViewController {
         gradientLayer2.colors = [UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1),
                                 UIColor(red: 164 / 255, green: 164 / 255, blue: 164 / 255, alpha: 1)]
         
-        circleOne.backgroundColor = UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1)
+//        circleOne.backgroundColor = UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1)
         circleTwo.backgroundColor = UIColor(red: 46 / 255, green: 46 / 255, blue: 46 / 255, alpha: 1)
-        circleOne.layer.addSublayer(gradientLayer)
-        circleTwo.layer.addSublayer(gradientLayer2)
+        circleOne.applyGradient(colours: [UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1),
+                                          UIColor(red: 164 / 255, green: 164 / 255, blue: 164 / 255, alpha: 1)])
+//        circleOne.layer.addSublayer(gradientLayer)
+//        circleTwo.layer.addSublayer(gradientLayer2)
     }
     
     func loadScrollViewContent() {
@@ -273,6 +283,12 @@ final class ProductDetailsViewController: UIViewController {
         productNameLabel.text = product.name
         productImageView.image = UIImage(named: product.imageName)
         productNameSmallerLabel.text = product.name
+        imagesScrollView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToWebView)))
+        bottomThreeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(viewPdfFile)))
+    }
+    
+    @objc func viewPdfFile() {
+        present(PdfViewController(), animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -319,22 +335,5 @@ extension ProductDetailsViewController: UIScrollViewDelegate {
         UIView.animate(withDuration: 0.5) {
             self.indicatorLineView.alpha = 0.8
         }
-    }
-}
-
-/// UIImage делает отступы паддинги внутри ImageView от самой картины
-extension UIImage {
-
-    func withInset(_ insets: UIEdgeInsets) -> UIImage? {
-        let cgSize = CGSize(width: self.size.width + insets.left * self.scale + insets.right * self.scale,
-                            height: self.size.height + insets.top * self.scale + insets.bottom * self.scale)
-
-        UIGraphicsBeginImageContextWithOptions(cgSize, false, self.scale)
-        defer { UIGraphicsEndImageContext() }
-
-        let origin = CGPoint(x: insets.left * self.scale, y: insets.top * self.scale)
-        draw(at: origin)
-
-        return UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(self.renderingMode)
     }
 }

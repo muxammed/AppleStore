@@ -7,26 +7,6 @@
 
 import UIKit
 
-/// константы
-struct Constants {
-    static let searchTitle = "Поиск"
-    static let searchTextFieldPlaceholder = "Поиск по продуктам и магазинам"
-    static let lastViewed = "Недавно просмотренные"
-    static let clearText = "Очистить"
-    static let queryOptionsText = "Варианты запросов"
-    static let productNameOne = "Чехол Incase Flat для MacBook Pro 16 дюймов"
-    static let productNameTwo = "Спортивный ремешок Black Unity (для ..."
-    static let productNameThree = "Кожанный чехол для MacBook Pro 16 дюймов, золотой"
-    static let productNameFour = "iPhone 12 Pro"
-    static let productPrice = "3 990.00 руб."
-    static let compatibleTextOne = "Совместимо с MacBook Pro - Евгений"
-    static let compatibleTextTwo = "MacBook Pro - Евгений"
-    static let addToCartText = "Добавить в корзину"
-    static let bottomTextOne = "Заказ сегодня в течении дня, доставка:"
-    static let bottomTextTwo = "Чт 25 Фев - Бесплатно"
-    static let bottomTextThree = "Варианты доставки для местоположения: 115533"
-}
-
 /// SearchViewController контроллер поиска
 final class SearchViewController: UIViewController {
     
@@ -41,13 +21,12 @@ final class SearchViewController: UIViewController {
     var searchTextField: UISearchTextField = {
         let searchTextField = UISearchTextField()
         searchTextField.placeholder = Constants.searchTextFieldPlaceholder
-        searchTextField.backgroundColor = UIColor(red: 28 / 255, green: 28 / 255, blue: 30 / 255, alpha: 1)
-        let color = UIColor(red: 130 / 255, green: 130 / 255, blue: 130 / 255, alpha: 1)
-        let attributes = [NSAttributedString.Key.foregroundColor: color,
+        searchTextField.backgroundColor = UIColor(named: "textFieldBackColor")
+        let attributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "searchTextFieldTintColor"),
                           NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)]
         searchTextField.attributedPlaceholder = NSAttributedString(string: Constants.searchTextFieldPlaceholder,
                                                                    attributes: attributes)
-        searchTextField.leftView?.tintColor = UIColor(red: 130 / 255, green: 130 / 255, blue: 130 / 255, alpha: 1)
+        searchTextField.leftView?.tintColor = UIColor(named: "searchTextFieldTintColor")
         return searchTextField
     }()
     var lastViewedLabel: UILabel = {
@@ -86,6 +65,7 @@ final class SearchViewController: UIViewController {
     var queries: [String] = ["AirPods", "AppleCare", "Beats", "Сравните модели iPhone"]
     var productImages: [String] = ["productOne", "productTwo", "productThree", "productFour"]
     var productItemWidth: CGFloat = 0.0
+    var delegate: SwitchModesDelegate?
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -101,6 +81,7 @@ final class SearchViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: Constants.searchTitle, style: .plain,
                                                            target: nil, action: nil)
+        delegate?.toggleMode(to: .dark)
     }
     
     // MARK: - Public methods
@@ -116,14 +97,16 @@ final class SearchViewController: UIViewController {
     private func loadDummyProducts() {
         
         var product = Product(name: Constants.productNameOne, imageName: productImages[0],
-                              images: [productImages[0], "case2", "case3"])
+                              images: [productImages[0], "case2", "case3"],
+                              productUrl: "https://ru-store.ru/catalog/product/chekhol_apple_mqg02zm_a_dark_blue_dlya_macbook_12/page/")
         products.append(product)
-        product = Product(name: Constants.productNameTwo, imageName: productImages[1], images: [])
+        product = Product(name: Constants.productNameTwo, imageName: productImages[1], images: [], productUrl: "https://ru-store.ru/catalog/watch/")
         products.append(product)
         product = Product(name: Constants.productNameThree, imageName: productImages[2],
-                          images: [productImages[2], "caseBrown2", "caseBrown3"])
+                          images: [productImages[2], "caseBrown2", "caseBrown3"],
+                          productUrl: "https://ru-store.ru/catalog/product/chekhol_apple_mqg02zm_a_dark_blue_dlya_macbook_12/page/")
         products.append(product)
-        product = Product(name: Constants.productNameFour, imageName: productImages[3], images: [])
+        product = Product(name: Constants.productNameFour, imageName: productImages[3], images: [], productUrl: "https://ru-store.ru/catalog/iphone/")
         products.append(product)
         
     }

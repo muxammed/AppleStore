@@ -10,7 +10,16 @@
 		1319563E28F42F3A009141A2 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1319563D28F42F3A009141A2 /* Product.swift */; };
 		1319564028F436E1009141A2 /* QueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1319563F28F436E1009141A2 /* QueryView.swift */; };
 		1319564228F446F8009141A2 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1319564128F446F8009141A2 /* ProductDetailsViewController.swift */; };
+		1319564428F4BBC4009141A2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1319564328F4BBC4009141A2 /* Extension+UIView.swift */; };
+		1319564628F4C3C8009141A2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1319564528F4C3C8009141A2 /* WebViewController.swift */; };
+		13D6824128F6281F00DDFDB9 /* PdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D6824028F6281F00DDFDB9 /* PdfViewController.swift */; };
+		13D6824328F6287600DDFDB9 /* dz.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 13D6824228F6287500DDFDB9 /* dz.pdf */; };
+		13D6824528F6359300DDFDB9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13D6824428F6359300DDFDB9 /* Colors.xcassets */; };
 		13D8373528F40BAF00C2CD70 /* ProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D8373428F40BAF00C2CD70 /* ProductView.swift */; };
+		13DB48F628F6F8AE00A8CFFA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB48F528F6F8AE00A8CFFA /* Constants.swift */; };
+		13DB48F828F7015C00A8CFFA /* OrderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB48F728F7015C00A8CFFA /* OrderView.swift */; };
+		13DB48FA28F71AC600A8CFFA /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB48F928F71AC600A8CFFA /* ProgressView.swift */; };
+		13DB48FC28F739A000A8CFFA /* RecommendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB48FB28F739A000A8CFFA /* RecommendsView.swift */; };
 		13F133C928F3C89D002F4048 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F133C828F3C89D002F4048 /* AppDelegate.swift */; };
 		13F133CB28F3C89D002F4048 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F133CA28F3C89D002F4048 /* SceneDelegate.swift */; };
 		13F133CD28F3C89D002F4048 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F133CC28F3C89D002F4048 /* ViewController.swift */; };
@@ -26,7 +35,16 @@
 		1319563D28F42F3A009141A2 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		1319563F28F436E1009141A2 /* QueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryView.swift; sourceTree = "<group>"; };
 		1319564128F446F8009141A2 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
+		1319564328F4BBC4009141A2 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		1319564528F4C3C8009141A2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		13D6824028F6281F00DDFDB9 /* PdfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewController.swift; sourceTree = "<group>"; };
+		13D6824228F6287500DDFDB9 /* dz.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = dz.pdf; sourceTree = "<group>"; };
+		13D6824428F6359300DDFDB9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		13D8373428F40BAF00C2CD70 /* ProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductView.swift; sourceTree = "<group>"; };
+		13DB48F528F6F8AE00A8CFFA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		13DB48F728F7015C00A8CFFA /* OrderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderView.swift; sourceTree = "<group>"; };
+		13DB48F928F71AC600A8CFFA /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		13DB48FB28F739A000A8CFFA /* RecommendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendsView.swift; sourceTree = "<group>"; };
 		13F133C528F3C89D002F4048 /* AppleStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F133C828F3C89D002F4048 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13F133CA28F3C89D002F4048 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +82,9 @@
 			children = (
 				13D8373428F40BAF00C2CD70 /* ProductView.swift */,
 				1319563F28F436E1009141A2 /* QueryView.swift */,
+				13DB48F728F7015C00A8CFFA /* OrderView.swift */,
+				13DB48F928F71AC600A8CFFA /* ProgressView.swift */,
+				13DB48FB28F739A000A8CFFA /* RecommendsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -93,6 +114,8 @@
 				13F133D128F3C89F002F4048 /* Assets.xcassets */,
 				13F133D628F3C89F002F4048 /* Info.plist */,
 				13F133E628F3CC97002F4048 /* LaunchScreen.storyboard */,
+				13D6824228F6287500DDFDB9 /* dz.pdf */,
+				13D6824428F6359300DDFDB9 /* Colors.xcassets */,
 			);
 			path = AppleStore;
 			sourceTree = "<group>";
@@ -108,6 +131,10 @@
 				13F133E228F3CB7F002F4048 /* ForYouViewController.swift */,
 				13F133E428F3CB9D002F4048 /* CartViewController.swift */,
 				1319564128F446F8009141A2 /* ProductDetailsViewController.swift */,
+				1319564328F4BBC4009141A2 /* Extension+UIView.swift */,
+				1319564528F4C3C8009141A2 /* WebViewController.swift */,
+				13D6824028F6281F00DDFDB9 /* PdfViewController.swift */,
+				13DB48F528F6F8AE00A8CFFA /* Constants.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -171,6 +198,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13D6824328F6287600DDFDB9 /* dz.pdf in Resources */,
+				13D6824528F6359300DDFDB9 /* Colors.xcassets in Resources */,
 				13F133D228F3C89F002F4048 /* Assets.xcassets in Resources */,
 				13F133E728F3CC97002F4048 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -205,15 +234,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				13D8373528F40BAF00C2CD70 /* ProductView.swift in Sources */,
+				13DB48FC28F739A000A8CFFA /* RecommendsView.swift in Sources */,
+				13DB48F828F7015C00A8CFFA /* OrderView.swift in Sources */,
 				1319564028F436E1009141A2 /* QueryView.swift in Sources */,
+				1319564428F4BBC4009141A2 /* Extension+UIView.swift in Sources */,
 				1319564228F446F8009141A2 /* ProductDetailsViewController.swift in Sources */,
 				13F133CD28F3C89D002F4048 /* ViewController.swift in Sources */,
+				13DB48FA28F71AC600A8CFFA /* ProgressView.swift in Sources */,
+				13DB48F628F6F8AE00A8CFFA /* Constants.swift in Sources */,
 				1319563E28F42F3A009141A2 /* Product.swift in Sources */,
 				13F133E128F3CB64002F4048 /* BuyViewController.swift in Sources */,
+				13D6824128F6281F00DDFDB9 /* PdfViewController.swift in Sources */,
 				13F133E528F3CB9D002F4048 /* CartViewController.swift in Sources */,
 				13F133E328F3CB7F002F4048 /* ForYouViewController.swift in Sources */,
 				13F133C928F3C89D002F4048 /* AppDelegate.swift in Sources */,
 				13F133DF28F3CB2B002F4048 /* SearchViewController.swift in Sources */,
+				1319564628F4C3C8009141A2 /* WebViewController.swift in Sources */,
 				13F133CB28F3C89D002F4048 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,6 +383,7 @@
 				DEVELOPMENT_TEAM = U68TY7Z9YL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppleStore/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -374,6 +411,7 @@
 				DEVELOPMENT_TEAM = U68TY7Z9YL;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AppleStore/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
