@@ -7,11 +7,13 @@
 
 import UIKit
 
-/// CartViewController
+/// CartViewController - контроллер корзины пока пустой
 final class CartViewController: UIViewController {
     
-    var delegate: SwitchModesDelegate?
+    // MARK: - Public Properties
+    weak var delegate: SwitchModesDelegate?
     
+    // MARK: - Lyfe cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black

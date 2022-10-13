@@ -22,7 +22,7 @@
 		13DB48FC28F739A000A8CFFA /* RecommendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB48FB28F739A000A8CFFA /* RecommendsView.swift */; };
 		13F133C928F3C89D002F4048 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F133C828F3C89D002F4048 /* AppDelegate.swift */; };
 		13F133CB28F3C89D002F4048 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F133CA28F3C89D002F4048 /* SceneDelegate.swift */; };
-		13F133CD28F3C89D002F4048 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F133CC28F3C89D002F4048 /* ViewController.swift */; };
+		13F133CD28F3C89D002F4048 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F133CC28F3C89D002F4048 /* TabBarViewController.swift */; };
 		13F133D228F3C89F002F4048 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13F133D128F3C89F002F4048 /* Assets.xcassets */; };
 		13F133DF28F3CB2B002F4048 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F133DE28F3CB2B002F4048 /* SearchViewController.swift */; };
 		13F133E128F3CB64002F4048 /* BuyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F133E028F3CB64002F4048 /* BuyViewController.swift */; };
@@ -48,7 +48,7 @@
 		13F133C528F3C89D002F4048 /* AppleStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13F133C828F3C89D002F4048 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		13F133CA28F3C89D002F4048 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		13F133CC28F3C89D002F4048 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		13F133CC28F3C89D002F4048 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		13F133D128F3C89F002F4048 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		13F133D628F3C89F002F4048 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13F133DE28F3CB2B002F4048 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -125,7 +125,7 @@
 			children = (
 				1319563C28F42F2F009141A2 /* Models */,
 				13D8373328F40B9D00C2CD70 /* Views */,
-				13F133CC28F3C89D002F4048 /* ViewController.swift */,
+				13F133CC28F3C89D002F4048 /* TabBarViewController.swift */,
 				13F133DE28F3CB2B002F4048 /* SearchViewController.swift */,
 				13F133E028F3CB64002F4048 /* BuyViewController.swift */,
 				13F133E228F3CB7F002F4048 /* ForYouViewController.swift */,
@@ -239,7 +239,7 @@
 				1319564028F436E1009141A2 /* QueryView.swift in Sources */,
 				1319564428F4BBC4009141A2 /* Extension+UIView.swift in Sources */,
 				1319564228F446F8009141A2 /* ProductDetailsViewController.swift in Sources */,
-				13F133CD28F3C89D002F4048 /* ViewController.swift in Sources */,
+				13F133CD28F3C89D002F4048 /* TabBarViewController.swift in Sources */,
 				13DB48FA28F71AC600A8CFFA /* ProgressView.swift in Sources */,
 				13DB48F628F6F8AE00A8CFFA /* Constants.swift in Sources */,
 				1319563E28F42F3A009141A2 /* Product.swift in Sources */,

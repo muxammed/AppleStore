@@ -6,16 +6,17 @@
 //
 
 import UIKit
-/// BuyViewController
+/// BuyViewController - контроллер для покупки пока пустой
 final class BuyViewController: UIViewController {
     
-    var delegate: SwitchModesDelegate?
+    // MARK: - Public Properties
+    weak var delegate: SwitchModesDelegate?
     
+    // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "viewBackground")
-        
+        view.backgroundColor = UIColor(named: Constants.viewBackground)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -8,11 +8,12 @@
 import UIKit
 
 /// OrderView кастомный вьюв для переиспользования и вывода данных о заказах
-class OrderView: UIView {
+final class OrderView: UIView {
     
+    // MARK: - Visual Components
     let orderImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "airpods")
+        imageView.image = UIImage(named: Constants.airpods)
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
         return imageView
@@ -29,20 +30,20 @@ class OrderView: UIView {
         let label = UILabel()
         label.text = Constants.orderSummaryText
         label.font = UIFont.systemFont(ofSize: 15, weight: .light)
-        label.textColor = UIColor(named: "searchTextFieldTintColor")
+        label.textColor = UIColor(named: Constants.searchTextFieldTintColor)
         return label
     }()
     
     let seperatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "searchTextFieldTintColor")?.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor(named: Constants.searchTextFieldTintColor)?.withAlphaComponent(0.5)
         return view
     }()
     
     let progressView: ProgressView = {
         let progressView = ProgressView()
-        progressView.trackTintColor = UIColor(named: "trackTintColor")
-        progressView.progressTintColor = UIColor(named: "progressTintColor")
+        progressView.trackTintColor = UIColor(named: Constants.trackTintColor)
+        progressView.progressTintColor = UIColor(named: Constants.progressTintColor)
         progressView.progress = 0.0
         progressView.clipsToBounds = true
         return progressView
@@ -50,7 +51,7 @@ class OrderView: UIView {
     
     let arrowButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.setImage(UIImage(systemName: Constants.strelka), for: .normal)
         button.tintColor = .gray
         button.contentMode = .scaleAspectFit
         return button
@@ -81,11 +82,7 @@ class OrderView: UIView {
         return label
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-    }
-    
+    // MARK: - Public Properties
     func animateDelivery() {
         inProgressLabel.textColor = .black
         
@@ -122,6 +119,17 @@ class OrderView: UIView {
         
     }
     
+    // MARK: - Initializers
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - UIViewController(*)
     override func layoutSubviews() {
         orderStatusLabel.frame = CGRect(x: orderImageView.frame.maxX + 20, y: orderImageView.frame.minY,
                                         width: self.frame.width - 120, height: orderStatusLabel.font.pointSize)
@@ -155,9 +163,5 @@ class OrderView: UIView {
                                         width: 80,
                                         height: isDeliveredLabel.font.pointSize)
         
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

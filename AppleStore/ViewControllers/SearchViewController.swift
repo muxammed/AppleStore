@@ -21,12 +21,12 @@ final class SearchViewController: UIViewController {
     var searchTextField: UISearchTextField = {
         let searchTextField = UISearchTextField()
         searchTextField.placeholder = Constants.searchTextFieldPlaceholder
-        searchTextField.backgroundColor = UIColor(named: "textFieldBackColor")
-        let attributes = [NSAttributedString.Key.foregroundColor: UIColor(named: "searchTextFieldTintColor"),
+        searchTextField.backgroundColor = UIColor(named: Constants.textFieldBackColor)
+        let attributes = [NSAttributedString.Key.foregroundColor: UIColor(named: Constants.searchTextFieldTintColor),
                           NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)]
         searchTextField.attributedPlaceholder = NSAttributedString(string: Constants.searchTextFieldPlaceholder,
                                                                    attributes: attributes)
-        searchTextField.leftView?.tintColor = UIColor(named: "searchTextFieldTintColor")
+        searchTextField.leftView?.tintColor = UIColor(named: Constants.searchTextFieldTintColor)
         return searchTextField
     }()
     var lastViewedLabel: UILabel = {
@@ -62,10 +62,11 @@ final class SearchViewController: UIViewController {
     
     // MARK: - Public Properties
     var products: [Product] = []
-    var queries: [String] = ["AirPods", "AppleCare", "Beats", "Сравните модели iPhone"]
-    var productImages: [String] = ["productOne", "productTwo", "productThree", "productFour"]
+    var queries: [String] = [Constants.AirPods, Constants.AppleCare, Constants.Beats, Constants.compareText]
+    var productImages: [String] = [Constants.productOne, Constants.productTwo,
+                                   Constants.productThree, Constants.productFour]
     var productItemWidth: CGFloat = 0.0
-    var delegate: SwitchModesDelegate?
+    weak var delegate: SwitchModesDelegate?
     
     // MARK: - Life cycle
     override func viewDidLoad() {
@@ -97,16 +98,18 @@ final class SearchViewController: UIViewController {
     private func loadDummyProducts() {
         
         var product = Product(name: Constants.productNameOne, imageName: productImages[0],
-                              images: [productImages[0], "case2", "case3"],
-                              productUrl: "https://ru-store.ru/catalog/product/chekhol_apple_mqg02zm_a_dark_blue_dlya_macbook_12/page/")
+                              images: [productImages[0], Constants.case2, Constants.case3],
+                              productUrl: Constants.productOneUrl)
         products.append(product)
-        product = Product(name: Constants.productNameTwo, imageName: productImages[1], images: [], productUrl: "https://ru-store.ru/catalog/watch/")
+        product = Product(name: Constants.productNameTwo, imageName: productImages[1], images: [],
+                          productUrl: Constants.productTwoUrl)
         products.append(product)
         product = Product(name: Constants.productNameThree, imageName: productImages[2],
-                          images: [productImages[2], "caseBrown2", "caseBrown3"],
-                          productUrl: "https://ru-store.ru/catalog/product/chekhol_apple_mqg02zm_a_dark_blue_dlya_macbook_12/page/")
+                          images: [productImages[2], Constants.caseBrown2, Constants.caseBrown3],
+                          productUrl: Constants.productThreeUrl)
         products.append(product)
-        product = Product(name: Constants.productNameFour, imageName: productImages[3], images: [], productUrl: "https://ru-store.ru/catalog/iphone/")
+        product = Product(name: Constants.productNameFour, imageName: productImages[3], images: [],
+                          productUrl: Constants.productFourUrl)
         products.append(product)
         
     }

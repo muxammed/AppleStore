@@ -11,44 +11,44 @@ import WebKit
 /// WebViewController - модальный контроллер для открытия соответствующих ссылок с кнопками навигации для удобства перемещения в вебвьюв
 final class WebViewController: UIViewController {
     
+    // MARK: - Visual Components
     let webView: WKWebView = {
         let webConfiguration = WKWebViewConfiguration()
         let webView = WKWebView(frame: .zero, configuration: webConfiguration)
         return webView
-        
     }()
     
     let backwardButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setBackgroundImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: Constants.strelkaDwa), for: .normal)
         button.contentMode = .scaleAspectFit
         return button
     }()
     
     let forwardButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setBackgroundImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: Constants.strelka), for: .normal)
         button.contentMode = .scaleAspectFit
         return button
     }()
     
     let refreshButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setBackgroundImage(UIImage(systemName: "arrow.clockwise"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: Constants.refreshIcon), for: .normal)
         button.contentMode = .scaleAspectFit
         return button
     }()
     
     let shareButton: UIButton = {
         let button = UIButton(type: .custom)
-        button.setBackgroundImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: Constants.shareIcon), for: .normal)
         button.contentMode = .scaleAspectFit
         return button
     }()
     
     var bottomToolbar: UIToolbar = {
         let toolbar = UIToolbar()
-        toolbar.barTintColor = UIColor(red: 39 / 255, green: 39 / 255, blue: 39 / 255, alpha: 1)
+        toolbar.barTintColor = UIColor(named: Constants.webViewToolbarColor)
         toolbar.isTranslucent = false
         return toolbar
     }()
@@ -57,35 +57,22 @@ final class WebViewController: UIViewController {
         let progressView = UIProgressView(progressViewStyle: UIProgressView.Style.bar)
         return progressView
     }()
-    var url = "https://re-store.ru"
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .black
-        
-        view.addSubview(webView)
-        webView.navigationDelegate = self
-        view.addSubview(bottomToolbar)
-        bottomToolbar.addSubview(backwardButton)
-        bottomToolbar.addSubview(forwardButton)
-        bottomToolbar.addSubview(refreshButton)
-        bottomToolbar.addSubview(shareButton)
-        bottomToolbar.addSubview(progressView)
-        loadWebPage(urlString: url)
-        
-        backwardButton.addTarget(self, action: #selector(backwardButtonAction), for: .touchUpInside)
-        forwardButton.addTarget(self, action: #selector(forwardButtonAction), for: .touchUpInside)
-        refreshButton.addTarget(self, action: #selector(refreshButtonAction), for: .touchUpInside)
-        shareButton.addTarget(self, action: #selector(shareButtonAction), for: .touchUpInside)
+    // MARK: - Public Properties
+    var url = Constants.dummySite
+    
+    // MARK: - Private Properties
+    private var observation: NSKeyValueObservation?
+    
+    // MARK: - Initializers
+    deinit {
+        observation = nil
     }
     
-    func loadWebPage(urlString: String) {
-        guard let url = URL(string: urlString) else { return }
-        webView.load(URLRequest.init(url: url))
-        
-            observation = webView.observe(\.estimatedProgress, options: [.new]) { _, _ in
-                self.progressView.progress = Float(self.webView.estimatedProgress)
-            }
+    // MARK: - Life cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -100,12 +87,7 @@ final class WebViewController: UIViewController {
         progressView.center.y = refreshButton.center.y
     }
     
-    private var observation: NSKeyValueObservation?
-    
-    deinit {
-        observation = nil
-    }
-    
+    // MARK: - Public methods
     @objc func forwardButtonAction() {
         webView.goForward()
     }
@@ -128,6 +110,35 @@ final class WebViewController: UIViewController {
         present(activityController, animated: true, completion: nil)
     }
     
+    // MARK: - Private Methods
+    private func configure() {
+        view.backgroundColor = .black
+        
+        view.addSubview(webView)
+        webView.navigationDelegate = self
+        view.addSubview(bottomToolbar)
+        bottomToolbar.addSubview(backwardButton)
+        bottomToolbar.addSubview(forwardButton)
+        bottomToolbar.addSubview(refreshButton)
+        bottomToolbar.addSubview(shareButton)
+        bottomToolbar.addSubview(progressView)
+        loadWebPage(urlString: url)
+        
+        backwardButton.addTarget(self, action: #selector(backwardButtonAction), for: .touchUpInside)
+        forwardButton.addTarget(self, action: #selector(forwardButtonAction), for: .touchUpInside)
+        refreshButton.addTarget(self, action: #selector(refreshButtonAction), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(shareButtonAction), for: .touchUpInside)
+    
+    }
+    
+    private func loadWebPage(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        webView.load(URLRequest.init(url: url))
+        
+            observation = webView.observe(\.estimatedProgress, options: [.new]) { _, _ in
+                self.progressView.progress = Float(self.webView.estimatedProgress)
+            }
+    }
 }
 
 extension WebViewController: WKNavigationDelegate {

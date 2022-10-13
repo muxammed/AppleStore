@@ -8,11 +8,12 @@
 import UIKit
 
 /// RecommendsView - вьюв для переиспользования и показа рекомендаций
-class RecommendsView: UIView {
+final class RecommendsView: UIView {
    
+    // MARK: - Visual Components
     let recomImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "app.badge")
+        imageView.image = UIImage(systemName: Constants.appBadgeIcon)
         imageView.tintColor = .red
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .clear
@@ -32,41 +33,34 @@ class RecommendsView: UIView {
         label.numberOfLines = 2
         label.text = Constants.notifySubText
         label.font = UIFont.systemFont(ofSize: 13, weight: .light)
-        label.textColor = UIColor(named: "searchTextFieldTintColor")
+        label.textColor = UIColor(named: Constants.searchTextFieldTintColor)
         return label
     }()
     
     let seperatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "searchTextFieldTintColor")?.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor(named: Constants.searchTextFieldTintColor)?.withAlphaComponent(0.5)
         return view
     }()
     
     let arrowButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.setImage(UIImage(systemName: Constants.strelka), for: .normal)
         button.tintColor = .gray
         button.contentMode = .scaleAspectFit
         return button
     }()
     
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
     
-    func setupViews() {
-        
-        backgroundColor = .white
-        
-        addSubview(recomImageView)
-        recomImageView.frame = CGRect(x: 20, y: 20, width: 60, height: 60)
-        addSubview(recomTitleLabel)
-        addSubview(recomSummaryLabel)
-        addSubview(seperatorView)
-        addSubview(arrowButton)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    
+    // MARK: - UIViewController(*)
     override func layoutSubviews() {
         recomTitleLabel.frame = CGRect(x: recomImageView.frame.maxX + 20, y: recomImageView.frame.minY,
                                         width: self.frame.width - 120, height: recomTitleLabel.font.pointSize * 4)
@@ -78,8 +72,14 @@ class RecommendsView: UIView {
         arrowButton.center.y = frame.height / 2
         
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    // MARK: - Public methods
+    func setupViews() {
+        backgroundColor = .white
+        addSubview(recomImageView)
+        recomImageView.frame = CGRect(x: 20, y: 20, width: 60, height: 60)
+        addSubview(recomTitleLabel)
+        addSubview(recomSummaryLabel)
+        addSubview(seperatorView)
+        addSubview(arrowButton)
     }
 }

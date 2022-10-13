@@ -6,7 +6,6 @@
 //
 
 import AVFoundation
-import Foundation
 import UIKit
 
 /// протокол для переключения мода в таббар контроллере
@@ -15,7 +14,7 @@ protocol SwitchModesDelegate: AnyObject {
 }
 
 /// ForYouViewController
-final class ForYouViewController: UIViewController, UIScrollViewDelegate {
+final class ForYouViewController: UIViewController {
     
     // MARK: - Visual Components
     var scrollView = UIScrollView()
@@ -24,7 +23,7 @@ final class ForYouViewController: UIViewController, UIScrollViewDelegate {
         let button = UIButton()
         button.backgroundColor = .white
         let insets = UIEdgeInsets(top: -15, left: -15, bottom: -15, right: -15)
-        button.setImage(UIImage(named: "caseBrown2"), for: .normal)
+        button.setImage(UIImage(named: Constants.caseBrown2), for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 22
         return button
@@ -37,7 +36,7 @@ final class ForYouViewController: UIViewController, UIScrollViewDelegate {
         view.layer.borderWidth = 0
         view.layer.borderColor = UIColor.black.cgColor
         view.layer.cornerRadius = 22
-        view.layer.shadowColor = UIColor(named: "viewBackground")?.cgColor
+        view.layer.shadowColor = UIColor(named: Constants.viewBackground)?.cgColor
         view.layer.shadowOffset = CGSize(width: 0, height: 3)
         view.layer.shadowRadius = 1.5
         view.layer.shouldRasterize = true
@@ -46,7 +45,7 @@ final class ForYouViewController: UIViewController, UIScrollViewDelegate {
     }()
 
     let imageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(named: "caseBrown2"))
+        let imageView = UIImageView(image: UIImage(named: Constants.caseBrown2))
         imageView.layer.cornerRadius = imageView.frame.height * 0.5
         imageView.layer.masksToBounds = true
         return imageView
@@ -96,7 +95,7 @@ final class ForYouViewController: UIViewController, UIScrollViewDelegate {
     }()
     
     // MARK: - Public Properties
-    var delegate: SwitchModesDelegate?
+    weak var delegate: SwitchModesDelegate?
     
     // MARK: - Lyfe Cicle
     override func viewDidLoad() {
@@ -117,18 +116,6 @@ final class ForYouViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Public methods
     @objc func showImagePickerAction() {
         present(pickerController, animated: true, completion: nil)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        largeTitleViewRightBarButton.frame.origin.y = -(scrollView.contentOffset.y + 143)
-        largeTitleViewRightButtonShadowView.frame.origin.y = -(scrollView.contentOffset.y + 143)
-        
-        if scrollView.contentOffset.y >= -103 {
-            navigationItem.rightBarButtonItem = rightBarButtonItem
-        } else {
-            navigationItem.rightBarButtonItem = nil
-        }
     }
     
     // MARK: - Private Methods
@@ -175,7 +162,7 @@ final class ForYouViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.frame = view.frame
         scrollView.contentSize = CGSize(width: view.frame.width, height: 1000)
-        seperator.backgroundColor = UIColor(named: "linesColor")?.withAlphaComponent(0.3)
+        seperator.backgroundColor = UIColor(named: Constants.linesColor)?.withAlphaComponent(0.3)
         seperator.frame = CGRect(x: 10, y: 0, width: view.frame.width - 20, height: 1)
         largeTitleViewRightBarButton.frame = CGRect(x: view.frame.width - 50, y:
                                 0, width: 50, height: 50)
@@ -214,7 +201,7 @@ final class ForYouViewController: UIViewController, UIScrollViewDelegate {
     private func addingButtonToLargeTitleView() {
         guard let navCont = navigationController else { return }
         
-        if let largeTitleClass = NSClassFromString("_UINavigationBarLargeTitleView") as? UIView.Type {
+        if let largeTitleClass = NSClassFromString(Constants.largeTitleViewClassName) as? UIView.Type {
 
             if let largeTitleLabel = self.findSubview(parentView: navCont.view, type: UILabel.self) {
                 if let largeTitleView = self.findSubview(parentView: navCont.view,
@@ -240,32 +227,45 @@ final class ForYouViewController: UIViewController, UIScrollViewDelegate {
     private func beforeAppearActions() {
         delegate?.toggleMode(to: .light)
         navigationController?.navigationBar.prefersLargeTitles = true
-        view.backgroundColor = UIColor(named: "viewBackground")
-        self.title = Constants.forYouText
+        view.backgroundColor = UIColor(named: Constants.viewBackground)
+        title = Constants.forYouText
     }
     
     private func saveToUserDefaults(image: Data) {
         let defaults = UserDefaults.standard
-        guard defaults.object(forKey: "avatar") != nil else {
-            defaults.setValue(image, forKey: "avatar")
+        guard defaults.object(forKey: Constants.avatarStringForUDefKey) != nil else {
+            defaults.setValue(image, forKey: Constants.avatarStringForUDefKey)
             return
         }
-        defaults.removeObject(forKey: "avatar")
-        defaults.setValue(image, forKey: "avatar")
+        defaults.removeObject(forKey: Constants.avatarStringForUDefKey)
+        defaults.setValue(image, forKey: Constants.avatarStringForUDefKey)
     }
     
     private func loadFromUserDefaults() -> UIImage? {
         let userdefaults = UserDefaults.standard
-        guard let dataImage = userdefaults.object(forKey: "avatar") as? Data else {
-            let image = UIImage(named: "brownCase2")
+        guard let dataImage = userdefaults.object(forKey: Constants.avatarStringForUDefKey) as? Data,
+              let image = UIImage(data: dataImage)
+        else {
+            let image = UIImage(named: Constants.brownCase2)
             return image
         }
         
-        guard let image = UIImage(data: dataImage) else {
-            let image = UIImage(named: "brownCase2")
-            return image
-        }
         return image
+    }
+}
+
+/// UIScrollViewDelegate
+extension ForYouViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        largeTitleViewRightBarButton.frame.origin.y = -(scrollView.contentOffset.y + 143)
+        largeTitleViewRightButtonShadowView.frame.origin.y = -(scrollView.contentOffset.y + 143)
+        
+        if scrollView.contentOffset.y >= -103 {
+            navigationItem.rightBarButtonItem = rightBarButtonItem
+        } else {
+            navigationItem.rightBarButtonItem = nil
+        }
     }
 }
 

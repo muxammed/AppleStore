@@ -10,11 +10,12 @@ import UIKit
 /// Кастомный вьюв для отображения и переиспользования вариантов запросов
 final class QueryView: UIView {
     
+    // MARK: - Visual Components
     let searchIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "magnifyingglass")
-        imageView.tintColor = UIColor(red: 130 / 255, green: 130 / 255, blue: 130 / 255, alpha: 1)
+        imageView.image = UIImage(systemName: Constants.magnifyingglass)
+        imageView.tintColor = UIColor(named: Constants.searchIconTint)
         return imageView
     }()
     
@@ -27,24 +28,27 @@ final class QueryView: UIView {
     
     let seperatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 18 / 255, green: 18 / 255, blue: 18 / 255, alpha: 1)
+        view.backgroundColor = UIColor(named: Constants.navBackColor)
         return view
     }()
     
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        configureFrames()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public methods
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        configureFrames()
+    }
+    
+    // MARK: - Private Methods
     private func setupViews() {
         addSubview(searchIcon)
         addSubview(queryTextLabel)
@@ -59,5 +63,4 @@ final class QueryView: UIView {
         queryTextLabel.center.y = self.frame.height / 2
         seperatorView.frame = CGRect(x: 0, y: searchIcon.frame.maxY + 10, width: self.frame.width, height: 1)
     }
-    
 }
