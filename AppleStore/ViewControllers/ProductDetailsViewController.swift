@@ -16,8 +16,7 @@ enum Images: String {
 /// ProductDetailsViewController экран с детализацией выбранного продукта
 final class ProductDetailsViewController: UIViewController {
     
-    var product: Product?
-    
+    // MARK: - Visual Components
     var productNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -30,7 +29,7 @@ final class ProductDetailsViewController: UIViewController {
     var productPriceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        label.textColor = UIColor(red: 120 / 255, green: 120 / 255, blue: 120 / 255, alpha: 1)
+        label.textColor = UIColor(named: Constants.ownGrayColor)
         label.text = Constants.productPrice
         label.textAlignment = .center
         return label
@@ -64,7 +63,7 @@ final class ProductDetailsViewController: UIViewController {
     var productNameSmallerLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 11, weight: .medium)
-        label.textColor = UIColor(red: 120 / 255, green: 120 / 255, blue: 120 / 255, alpha: 1)
+        label.textColor = UIColor(named: Constants.ownGrayColor)
         label.textAlignment = .center
         return label
     }()
@@ -90,16 +89,16 @@ final class ProductDetailsViewController: UIViewController {
         view.clipsToBounds = true
         view.backgroundColor = .clear
         view.layer.borderWidth = 2
-        view.layer.borderColor = UIColor(red: 0 / 255, green: 0 / 255, blue: 255 / 255, alpha: 0.8).cgColor
+        view.layer.borderColor = UIColor.blue.withAlphaComponent(0.8).cgColor
         return view
     }()
     
     let checkImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "checkmark.circle.fill")?
+        imageView.image = UIImage(systemName: Constants.checkmarkIcon)?
             .withTintColor(.black, renderingMode: .alwaysTemplate)
         imageView.clipsToBounds = true
-        imageView.tintColor = UIColor(red: 64 / 255, green: 210 / 255, blue: 85 / 255, alpha: 1)
+        imageView.tintColor = UIColor(named: Constants.checkImageBackColor)
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 10
         return imageView
@@ -108,7 +107,7 @@ final class ProductDetailsViewController: UIViewController {
     let compatibleTextLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 11, weight: .medium)
-        label.textColor = UIColor(red: 120 / 255, green: 120 / 255, blue: 120 / 255, alpha: 1)
+        label.textColor = UIColor(named: Constants.ownGrayColor)
         return label
     }()
     
@@ -118,15 +117,15 @@ final class ProductDetailsViewController: UIViewController {
         button.setAttributedTitle(NSAttributedString(string: Constants.addToCartText, attributes: attr), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
-        button.backgroundColor = UIColor(red: 47 / 255, green: 133 / 255, blue: 255 / 255, alpha: 1)
+        button.backgroundColor = UIColor(named: Constants.addToCartButtonColor)
         return button
     }()
     
     let cubeImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "cube.box")
-        imageView.tintColor = UIColor(red: 120 / 255, green: 120 / 255, blue: 120 / 255, alpha: 1)
+        imageView.image = UIImage(systemName: Constants.cubeIcon)
+        imageView.tintColor = UIColor(named: Constants.ownGrayColor)
         return imageView
     }()
     
@@ -141,7 +140,7 @@ final class ProductDetailsViewController: UIViewController {
     let bottomTwoLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
-        label.textColor = UIColor(red: 120 / 255, green: 120 / 255, blue: 120 / 255, alpha: 1)
+        label.textColor = UIColor(named: Constants.ownGrayColor)
         label.text = Constants.bottomTextTwo
         return label
     }()
@@ -151,10 +150,14 @@ final class ProductDetailsViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 11, weight: .regular)
         label.textColor = .systemBlue
         label.text = Constants.bottomTextThree
+        label.isUserInteractionEnabled = true
         return label
     }()
+    // MARK: - Public Properties
+    var product: Product?
     
-    fileprivate func configureFrames() {
+    // MARK: - Private Properties
+    private func configureFrames() {
         productNameLabel.frame = CGRect(x: 10, y: 120, width: view.frame.width - 20,
                                         height: productNameLabel.font.pointSize)
         productImageView.frame = CGRect(x: 20, y: 0, width: view.frame.width - 40, height: 300)
@@ -201,6 +204,32 @@ final class ProductDetailsViewController: UIViewController {
                                       width: view.frame.width - 50, height: bottomOneLabel.font.pointSize)
     }
     
+    // MARK: - Lyfe Cicle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configOnViewWillAppear()
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        configureFrames()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.backgroundColor = .clear
+    }
+    
+    // MARK: - Public methods
+    @objc func goToWebViewAction() {
+        let webViewController = WebViewController()
+        guard let product = product else { return }
+        webViewController.url = product.productUrl
+        present(webViewController, animated: true, completion: nil)
+    }
+    
     func manageAttributedString() {
         var attrString = AttributedString(Constants.compatibleTextOne)
         guard let range = attrString.range(of: Constants.compatibleTextTwo) else { return }
@@ -211,17 +240,13 @@ final class ProductDetailsViewController: UIViewController {
     func addingGradientToCircleViews() {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame.size = circleOne.frame.size
-        gradientLayer.colors = [UIColor(red: 46 / 255, green: 46 / 255, blue: 46 / 255, alpha: 1),
-                                UIColor(red: 74 / 255, green: 74 / 255, blue: 74 / 255, alpha: 1)]
+        gradientLayer.colors = [UIColor(named: Constants.circleTwoColor) as Any,
+                                UIColor(named: Constants.gradOne) as Any]
         let gradientLayer2 = CAGradientLayer()
         gradientLayer2.frame.size = circleTwo.frame.size
-        gradientLayer2.colors = [UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1),
-                                UIColor(red: 164 / 255, green: 164 / 255, blue: 164 / 255, alpha: 1)]
-        
-        circleOne.backgroundColor = UIColor(red: 152 / 255, green: 152 / 255, blue: 152 / 255, alpha: 1)
-        circleTwo.backgroundColor = UIColor(red: 46 / 255, green: 46 / 255, blue: 46 / 255, alpha: 1)
-        circleOne.layer.addSublayer(gradientLayer)
-        circleTwo.layer.addSublayer(gradientLayer2)
+        gradientLayer2.colors = [UIColor(named: Constants.gradTwo) as Any,
+                                 UIColor(named: Constants.gradTri) as Any]
+        circleTwo.backgroundColor = UIColor(named: Constants.circleTwoColor)
     }
     
     func loadScrollViewContent() {
@@ -239,11 +264,6 @@ final class ProductDetailsViewController: UIViewController {
             pageView.addSubview(imageView)
             imagesScrollView.addSubview(pageView)
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
     }
     
     func setupViews() {
@@ -273,11 +293,14 @@ final class ProductDetailsViewController: UIViewController {
         productNameLabel.text = product.name
         productImageView.image = UIImage(named: product.imageName)
         productNameSmallerLabel.text = product.name
+        imagesScrollView.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                     action: #selector(goToWebViewAction)))
+        bottomThreeLabel.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                     action: #selector(viewPdfFileAction)))
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        configOnViewWillAppear()
+    @objc func viewPdfFileAction() {
+        present(PdfViewController(), animated: true, completion: nil)
     }
     
     func configOnViewWillAppear() {
@@ -288,21 +311,10 @@ final class ProductDetailsViewController: UIViewController {
                                              style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItems = [favoriteButton, shareButton]
         
-        navigationController?.navigationBar.backgroundColor = UIColor(red: 18 / 255, green: 18 / 255,
-                                                                      blue: 18 / 255, alpha: 1)
+        navigationController?.navigationBar.backgroundColor = UIColor(named: Constants.navBackColor)
         let topView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 85))
-        topView.backgroundColor = UIColor(red: 18 / 255, green: 18 / 255, blue: 18 / 255, alpha: 1)
+        topView.backgroundColor = UIColor(named: Constants.navBackColor)
         view.addSubview(topView)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.backgroundColor = .clear
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        configureFrames()
     }
 }
 
@@ -319,22 +331,5 @@ extension ProductDetailsViewController: UIScrollViewDelegate {
         UIView.animate(withDuration: 0.5) {
             self.indicatorLineView.alpha = 0.8
         }
-    }
-}
-
-/// UIImage делает отступы паддинги внутри ImageView от самой картины
-extension UIImage {
-
-    func withInset(_ insets: UIEdgeInsets) -> UIImage? {
-        let cgSize = CGSize(width: self.size.width + insets.left * self.scale + insets.right * self.scale,
-                            height: self.size.height + insets.top * self.scale + insets.bottom * self.scale)
-
-        UIGraphicsBeginImageContextWithOptions(cgSize, false, self.scale)
-        defer { UIGraphicsEndImageContext() }
-
-        let origin = CGPoint(x: insets.left * self.scale, y: insets.top * self.scale)
-        draw(at: origin)
-
-        return UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(self.renderingMode)
     }
 }

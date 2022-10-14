@@ -10,6 +10,7 @@ import UIKit
 /// кастомный вьюв для переиспользования и показа продукции
 final class ProductView: UIView {
     
+    // MARK: - Visual Components
     var productImage: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -25,22 +26,25 @@ final class ProductView: UIView {
         return label
     }()
     
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
-    }
-    
-    override func layoutSubviews() {
-        configureFrames()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public methods
+    override func layoutSubviews() {
+        configureFrames()
+    }
+    
+    // MARK: - Private Methods
     private func setupViews() {
         self.layer.cornerRadius = 15
-        self.backgroundColor = UIColor(red: 18 / 255, green: 18 / 255, blue: 18 / 255, alpha: 1)
+        self.backgroundColor = UIColor(named: Constants.navBackColor)
         
         addSubview(productImage)
         addSubview(productName)
