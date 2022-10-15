@@ -135,7 +135,8 @@ final class WebViewController: UIViewController {
         guard let url = URL(string: urlString) else { return }
         webView.load(URLRequest.init(url: url))
         
-            observation = webView.observe(\.estimatedProgress, options: [.new]) { _, _ in
+            observation = webView.observe(\.estimatedProgress, options: [.new]) { [weak self] _, _ in
+                guard let self = self else { return }
                 self.progressView.progress = Float(self.webView.estimatedProgress)
             }
     }
@@ -144,12 +145,12 @@ final class WebViewController: UIViewController {
 extension WebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
-        self.progressView.layer.masksToBounds = false
-        self.progressView.layer.shadowColor = UIColor.white.cgColor
-        self.progressView.layer.shadowRadius = 10
-        self.progressView.layer.shadowOpacity = 0
-        self.progressView.layer.shouldRasterize = false
-        self.progressView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        progressView.layer.masksToBounds = false
+        progressView.layer.shadowColor = UIColor.white.cgColor
+        progressView.layer.shadowRadius = 10
+        progressView.layer.shadowOpacity = 0
+        progressView.layer.shouldRasterize = false
+        progressView.layer.shadowOffset = CGSize(width: 0, height: 0)
         
         UIView.animate(withDuration: 1) {
             self.progressView.tintColor = .systemGreen
