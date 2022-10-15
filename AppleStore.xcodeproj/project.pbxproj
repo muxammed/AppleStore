@@ -12,6 +12,9 @@
 		1319564228F446F8009141A2 /* ProductDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1319564128F446F8009141A2 /* ProductDetailsViewController.swift */; };
 		1319564428F4BBC4009141A2 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1319564328F4BBC4009141A2 /* Extension+UIView.swift */; };
 		1319564628F4C3C8009141A2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1319564528F4C3C8009141A2 /* WebViewController.swift */; };
+		1384EDC728F98629007622FC /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1384EDC628F98629007622FC /* OnBoardingViewController.swift */; };
+		1384EDCA28F98756007622FC /* BoardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1384EDC928F98756007622FC /* BoardingPageViewController.swift */; };
+		1384EDCC28F98857007622FC /* BoardPageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1384EDCB28F98857007622FC /* BoardPageHelper.swift */; };
 		13D6824128F6281F00DDFDB9 /* PdfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D6824028F6281F00DDFDB9 /* PdfViewController.swift */; };
 		13D6824328F6287600DDFDB9 /* dz.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 13D6824228F6287500DDFDB9 /* dz.pdf */; };
 		13D6824528F6359300DDFDB9 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13D6824428F6359300DDFDB9 /* Colors.xcassets */; };
@@ -37,6 +40,9 @@
 		1319564128F446F8009141A2 /* ProductDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsViewController.swift; sourceTree = "<group>"; };
 		1319564328F4BBC4009141A2 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		1319564528F4C3C8009141A2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		1384EDC628F98629007622FC /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		1384EDC928F98756007622FC /* BoardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingPageViewController.swift; sourceTree = "<group>"; };
+		1384EDCB28F98857007622FC /* BoardPageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardPageHelper.swift; sourceTree = "<group>"; };
 		13D6824028F6281F00DDFDB9 /* PdfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfViewController.swift; sourceTree = "<group>"; };
 		13D6824228F6287500DDFDB9 /* dz.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = dz.pdf; sourceTree = "<group>"; };
 		13D6824428F6359300DDFDB9 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -73,8 +79,17 @@
 			isa = PBXGroup;
 			children = (
 				1319563D28F42F3A009141A2 /* Product.swift */,
+				1384EDCB28F98857007622FC /* BoardPageHelper.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1384EDC828F9871F007622FC /* OnBoardVCs */ = {
+			isa = PBXGroup;
+			children = (
+				1384EDC928F98756007622FC /* BoardingPageViewController.swift */,
+			);
+			path = OnBoardVCs;
 			sourceTree = "<group>";
 		};
 		13D8373328F40B9D00C2CD70 /* Views */ = {
@@ -108,6 +123,8 @@
 		13F133C728F3C89D002F4048 /* AppleStore */ = {
 			isa = PBXGroup;
 			children = (
+				1319563C28F42F2F009141A2 /* Models */,
+				13D8373328F40B9D00C2CD70 /* Views */,
 				13F133DD28F3CB0F002F4048 /* ViewControllers */,
 				13F133C828F3C89D002F4048 /* AppDelegate.swift */,
 				13F133CA28F3C89D002F4048 /* SceneDelegate.swift */,
@@ -123,8 +140,6 @@
 		13F133DD28F3CB0F002F4048 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1319563C28F42F2F009141A2 /* Models */,
-				13D8373328F40B9D00C2CD70 /* Views */,
 				13F133CC28F3C89D002F4048 /* TabBarViewController.swift */,
 				13F133DE28F3CB2B002F4048 /* SearchViewController.swift */,
 				13F133E028F3CB64002F4048 /* BuyViewController.swift */,
@@ -135,6 +150,8 @@
 				1319564528F4C3C8009141A2 /* WebViewController.swift */,
 				13D6824028F6281F00DDFDB9 /* PdfViewController.swift */,
 				13DB48F528F6F8AE00A8CFFA /* Constants.swift */,
+				1384EDC628F98629007622FC /* OnBoardingViewController.swift */,
+				1384EDC828F9871F007622FC /* OnBoardVCs */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -235,8 +252,11 @@
 			files = (
 				13D8373528F40BAF00C2CD70 /* ProductView.swift in Sources */,
 				13DB48FC28F739A000A8CFFA /* RecommendsView.swift in Sources */,
+				1384EDCC28F98857007622FC /* BoardPageHelper.swift in Sources */,
+				1384EDCA28F98756007622FC /* BoardingPageViewController.swift in Sources */,
 				13DB48F828F7015C00A8CFFA /* OrderView.swift in Sources */,
 				1319564028F436E1009141A2 /* QueryView.swift in Sources */,
+				1384EDC728F98629007622FC /* OnBoardingViewController.swift in Sources */,
 				1319564428F4BBC4009141A2 /* Extension+UIView.swift in Sources */,
 				1319564228F446F8009141A2 /* ProductDetailsViewController.swift in Sources */,
 				13F133CD28F3C89D002F4048 /* TabBarViewController.swift in Sources */,

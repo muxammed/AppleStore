@@ -17,6 +17,18 @@ final class TabBarViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        navigationController?.navigationBar.isHidden = true
+        
+        if checkIsFirstTime() {
+            let vc = OnBoardingViewController()
+            vc.delegate = self
+            vc.modalPresentationStyle = .fullScreen
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7, execute: {
+                self.present(vc, animated: true, completion: nil)
+            })
+        }
+        
         configure()
     }
     
@@ -55,8 +67,15 @@ final class TabBarViewController: UITabBarController {
         self.viewControllers = controllers
     }
     
+    private func checkIsFirstTime() -> Bool {
+        let userdefaults = UserDefaults.standard
+        guard let isFirstTime = userdefaults.object(forKey: Constants.isFirstTime) as? Bool else { return true }
+        return isFirstTime
+    }
+    
 }
 
+/// UIImage разширения для измненения размера изображения
 extension UIImage {
     func imageResized(to size: CGSize) -> UIImage {
         return UIGraphicsImageRenderer(size: size).image { _ in
